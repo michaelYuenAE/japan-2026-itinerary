@@ -1,0 +1,303 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Japan 2026 — relaxed culture route</title>
+  <style>
+    :root { --ink:#1f2924; --paper:#f6f1e7; --cream:#fffaf1; --pine:#315d4f; --rose:#b96159; --sand:#d9c8a7; --muted:#65716b; }
+    * { box-sizing: border-box; }
+    body { margin:0; background:var(--paper); color:var(--ink); font:16px/1.5 ui-rounded, "Avenir Next", Avenir, system-ui, sans-serif; }
+    header { min-height:440px; padding:52px max(24px, calc((100vw - 1120px)/2)); display:flex; align-items:end; color:#fff; background:linear-gradient(90deg,rgba(19,35,29,.83),rgba(19,35,29,.22)), url('https://a0.muscache.com/im/pictures/Mt/MtTemplate-221858/original/6d6d57af-ef1b-47e2-8d0f-161f3362b50d.jpeg') center/cover; }
+    .eyebrow { margin:0 0 10px; letter-spacing:.12em; text-transform:uppercase; font-size:.78rem; font-weight:700; }
+    h1 { max-width:680px; margin:0; font-family:Georgia,serif; font-size:clamp(2.7rem,7vw,5.4rem); line-height:.95; }
+    .intro { max-width:650px; margin:18px 0 0; font-size:1.1rem; }
+    main { width:min(1120px, calc(100% - 40px)); margin:0 auto; }
+    .work-strip { margin:-32px 0 50px; padding:18px 22px; border-radius:14px; background:var(--cream); box-shadow:0 10px 35px rgba(31,41,36,.12); display:flex; gap:15px; align-items:center; }
+    .work-strip strong { color:var(--pine); }
+    h2 { font-family:Georgia,serif; font-size:2rem; margin:0 0 10px; }
+    .sub { color:var(--muted); margin:0 0 26px; }
+    .map-section { margin:0 0 58px; }
+    .route-summary { display:none; }
+    .route-map { width:100%; border-radius:16px; overflow:hidden; background:#dce8df; border:1px solid #c2d1c6; }
+    .route-map svg { display:block; width:100%; height:auto; min-height:360px; }
+    .map-grid { stroke:#93aaa0; stroke-width:1; opacity:.58; }
+    .route-line { fill:none; stroke:var(--pine); stroke-width:5; stroke-linecap:round; stroke-linejoin:round; }
+    .route-return { fill:none; stroke:var(--rose); stroke-width:4; stroke-linecap:round; stroke-dasharray:9 8; }
+    .map-pin { fill:var(--pine); stroke:var(--cream); stroke-width:4; }
+    .map-pin.return { fill:var(--rose); }
+    .map-number { fill:#fffaf1; font-size:15px; font-weight:800; text-anchor:middle; dominant-baseline:central; }
+    .map-label { fill:var(--ink); font:700 15px ui-rounded, "Avenir Next", Avenir, system-ui, sans-serif; }
+    .map-small { fill:var(--muted); font:12px ui-rounded, "Avenir Next", Avenir, system-ui, sans-serif; }
+    .calendar { display:grid; grid-template-columns:repeat(7, minmax(58px, 1fr)); gap:7px; margin:17px 0 0; }
+    .day-head { padding:2px 6px; color:var(--muted); text-align:center; font-size:.72rem; font-weight:800; text-transform:uppercase; letter-spacing:.06em; }
+    .day { min-width:60px; padding:9px 6px; text-align:center; border-radius:9px; background:#e6ece7; color:var(--pine); font-size:.78rem; font-weight:700; }
+    .day span { display:block; color:var(--muted); font-size:.7rem; font-weight:600; }
+    .day.weekend { background:#f0d4cd; color:#833c37; }
+    .day.weekend span { color:#9b554f; }
+    .day.blank { visibility:hidden; }
+    .key { display:flex; gap:14px; align-items:center; margin-top:12px; color:var(--muted); font-size:.82rem; }
+    .key i { width:11px; height:11px; border-radius:3px; background:#e6ece7; display:inline-block; }
+    .key i.weekend { background:#f0d4cd; }
+    .saved-pins { margin:26px 0 0; padding:20px; border-radius:14px; background:var(--cream); border:1px solid #e4d9c8; }
+    .saved-pins h3 { margin:0 0 13px; font-family:Georgia,serif; font-size:1.2rem; }
+    .saved-pin-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:10px; }
+    .saved-pin { padding:11px 12px; border-radius:10px; background:#edf3ee; color:var(--pine); font-size:.86rem; font-weight:750; }
+    .saved-pin span { display:block; margin-top:3px; color:var(--muted); font-size:.78rem; font-weight:500; }
+    .klook-plan { margin:26px 0 0; padding:21px; border-radius:14px; background:#fff6e9; border:1px solid #ead8bc; }
+    .klook-plan h3 { margin:0 0 5px; font-family:Georgia,serif; font-size:1.25rem; }
+    .klook-plan > p { margin:0 0 15px; color:var(--muted); font-size:.9rem; }
+    .klook-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:10px; }
+    .klook-item { padding:11px; border-radius:10px; background:var(--cream); border-left:3px solid var(--pine); font-size:.84rem; }
+    .klook-item b { display:block; color:var(--pine); }
+    .klook-item span { display:block; margin-top:4px; color:var(--muted); }
+    .klook-item.choice { border-left-color:var(--rose); }
+    .scheduled { margin:11px 0 4px !important; padding:10px 12px; border-left:3px solid var(--rose); background:#fbf3e9; border-radius:0 8px 8px 0; font-size:.93rem; }
+    .daily { padding:4px 0 58px; }
+    .city-nav { display:flex; flex-wrap:wrap; gap:8px; margin:20px 0 28px; }
+    .city-nav a { padding:7px 11px; border-radius:999px; color:var(--pine); background:#e3eee9; text-decoration:none; font-size:.86rem; font-weight:800; }
+    .city-nav a:hover { background:#cfe1d7; }
+    .city-block { margin:34px 0; padding:24px; border-radius:16px; background:#f1ece0; }
+    .city-heading { display:flex; gap:16px; align-items:center; margin-bottom:16px; }
+    .city-heading img { width:150px; height:92px; border-radius:10px; object-fit:cover; box-shadow:0 3px 12px rgba(31,41,36,.16); }
+    .city-block h3 { margin:0 0 4px; font-family:Georgia,serif; font-size:1.55rem; }
+    .city-note { margin:0; color:var(--muted); font-size:.9rem; }
+    .city-label { display:inline-block; margin-bottom:6px; color:var(--rose); font-size:.72rem; font-weight:800; text-transform:uppercase; letter-spacing:.09em; }
+    .daily-grid { display:grid; grid-template-columns:repeat(2, 1fr); gap:12px; }
+    .day-card { position:relative; min-height:132px; padding:15px 15px 15px 104px; border-radius:12px; background:var(--cream); border:1px solid #e4d9c8; overflow:hidden; }
+    .day-card:before { content:""; position:absolute; inset:0 auto 0 0; width:86px; background:center/cover no-repeat #d9c8a7; }
+    .osaka-days .day-card:before { background-image:url('https://a0.muscache.com/im/pictures/Mt/MtTemplate-221858/original/6d6d57af-ef1b-47e2-8d0f-161f3362b50d.jpeg'); }
+    .tokyo-days .day-card:before { background-image:url('https://www.gotokyo.org/shared/images/pages/destinations/western-tokyo/daikanyama/images/xarea034_1011_7.jpg.pagespeed.ic.zuueHxqQu5.jpg'); }
+    .fuji-days .day-card:before { background-image:url('https://images.unsplash.com/photo-1490806843957-31f4c9a91c65?auto=format&fit=crop&w=720&q=80'); }
+    .hakone-days .day-card:before { background-image:url('https://cdn.shopify.com/s/files/1/0412/0422/0060/files/amazakechaya01_ac6a1c11-73ca-4d3f-a233-69a35a727fb1.jpg?v=1617755841'); }
+    .izu-days .day-card:before { background-image:url('https://izu-tourism.com/wp-content/uploads/2024/06/tikurinnokomiti5-scaled.jpg'); }
+    .kanazawa-days .day-card:before { background-image:url('https://visitkanazawa.jp/lsc/upfile/articleDetail/0000/0975/975_3_xl.jpg'); }
+    /* Each thumbnail follows that day's main highlight, rather than repeating the city cover. */
+    .osaka-days .day-card:nth-child(1):before { background-image:url('https://kenshin.hk/blog/travel/news/202309/kishiwada-trial.jpg'); }
+    .osaka-days .day-card:nth-child(2):before { background-image:url('https://c04.castel.jp/400x400/0/usj-main-gate-j97810.jpg'); }
+    .osaka-days .day-card:nth-child(3):before { background-image:url('https://runway-media-production.global.ssl.fastly.net/us/originals/2025/02/Tsutenkaku-tower-in-Osakas-Shinsekai-entertainment-district-on-a-sunny-day_simonlong.jpg?width=3840'); }
+    .tokyo-days .day-card:nth-child(1):before { background-image:url('https://www.hospitalitynet.org/picture/xxl_153109003.jpg?t=1575367052'); }
+    .tokyo-days .day-card:nth-child(2):before { background-image:url('https://media1.tokyodisneyresort.jp/images/adventure/dh_room/2448_roomfree__image_1_1_en.jpg?mod=202607301309562'); }
+    .tokyo-days .day-card:nth-child(3):before { background-image:url('https://www.gotokyo.org/shared/images/pages/destinations/western-tokyo/daikanyama/images/xarea034_1011_7.jpg.pagespeed.ic.zuueHxqQu5.jpg'); }
+    .tokyo-days .day-card:nth-child(4):before { background-image:url('https://images.unsplash.com/photo-1531058020387-3be344556be6?auto=format&fit=crop&w=720&q=80'); }
+    .tokyo-days .day-card:nth-child(5):before { background-image:url('https://rarea.events/rarea/wp-content/uploads/2019/11/d24d113c8876630bad93ab73b1c6bd84_m-e1575005136208.jpg'); }
+    .fuji-days .day-card:nth-child(1):before { background-image:url('https://cdn.prod.rexby.com/image/9e86d29066fd4e55806aed909e2db130?format=webp&height=1350&width=1080'); }
+    .fuji-days .day-card:nth-child(2):before { background-image:url('https://ak-d.tripcdn.com/images/0100b120008i8wy4cD0F6.jpg'); }
+    .hakone-days .day-card:nth-child(1):before { background-image:url('https://cdn.shopify.com/s/files/1/0412/0422/0060/files/amazakechaya01_ac6a1c11-73ca-4d3f-a233-69a35a727fb1.jpg?v=1617755841'); }
+    .hakone-days .day-card:nth-child(2):before { background-image:url('https://assets.st-note.com/img/1669252792666-s0rkAj06As.jpg?width=1200'); }
+    .izu-days .day-card:nth-child(1):before { background-image:url('https://izu-tourism.com/wp-content/uploads/2024/06/tikurinnokomiti5-scaled.jpg'); }
+    .izu-days .day-card:nth-child(2):before { background-image:url('https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=720&q=80'); }
+    .izu-days .day-card:nth-child(3):before { background-image:url('https://guidable.co/wp-content/uploads/2022/05/shuzenji-featured-image.jpg'); }
+    .kanazawa-days .day-card:nth-child(1):before { background-image:url('https://visitkanazawa.jp/lsc/upfile/articleDetail/0000/0975/975_3_xl.jpg'); }
+    .kanazawa-days .day-card:nth-child(2):before { background-image:url('https://images.trvl-media.com/place/6345736/015cc099-b245-4059-8a55-1bebd882faac.jpg'); }
+    .kanazawa-days .day-card:nth-child(3):before { background-image:url('https://cdn.audleytravel.com/1050/751/79/1014668-teahouse-district-kanazawa.jpg'); }
+    .osaka-finale-days .day-card:before { background-image:url('https://a0.muscache.com/im/pictures/Mt/MtTemplate-221858/original/6d6d57af-ef1b-47e2-8d0f-161f3362b50d.jpeg'); }
+    .osaka-finale-days .day-card:nth-child(2):before { background-image:url('https://www.japanrailclub.com/wp-content/uploads/2024/11/Wakaden_Closing.jpg'); }
+    .osaka-finale-days .day-card:nth-child(3):before { background-image:url('https://runway-media-production.global.ssl.fastly.net/us/originals/2025/02/Tsutenkaku-tower-in-Osakas-Shinsekai-entertainment-district-on-a-sunny-day_simonlong.jpg?width=3840'); }
+    .day-card h4 { margin:0 0 10px; color:var(--pine); font-size:1rem; }
+    .slot { margin:7px 0 0; padding-top:7px; border-top:1px solid #eadfce; font-size:.9rem; }
+    .slot b { color:var(--rose); }
+    .slot.open { color:var(--muted); font-style:italic; }
+    .saved > h2, .saved > .sub, .saved > .gallery { display:none; }
+    .timeline { display:grid; gap:0; margin-bottom:58px; }
+    .stop { display:grid; grid-template-columns:110px 42px 1fr; gap:18px; min-height:112px; }
+    .date { padding-top:5px; font-weight:800; color:var(--pine); }
+    .line { position:relative; display:flex; justify-content:center; }
+    .line:before { content:""; position:absolute; top:0; bottom:0; width:2px; background:var(--sand); }
+    .stop:first-child .line:before { top:22px; }
+    .stop:last-child .line:before { bottom:calc(100% - 22px); }
+    .pin { position:relative; z-index:1; margin-top:3px; width:38px; height:38px; border-radius:50%; display:grid; place-items:center; background:var(--pine); color:white; font-size:1.1rem; box-shadow:0 0 0 6px var(--paper); }
+    .copy { position:relative; min-height:112px; padding:0 0 30px 106px; border-bottom:1px solid #ded3bf; }
+    .copy:before { content:""; position:absolute; left:0; top:0; width:88px; height:88px; border-radius:10px; background:center/cover no-repeat #d9c8a7; box-shadow:0 3px 10px rgba(31,41,36,.14); }
+    .stop:nth-child(1) .copy:before, .stop:nth-child(7) .copy:before { background-image:url('https://a0.muscache.com/im/pictures/Mt/MtTemplate-221858/original/6d6d57af-ef1b-47e2-8d0f-161f3362b50d.jpeg'); }
+    .stop:nth-child(2) .copy:before { background-image:url('https://www.gotokyo.org/shared/images/pages/destinations/western-tokyo/daikanyama/images/xarea034_1011_7.jpg.pagespeed.ic.zuueHxqQu5.jpg'); }
+    .stop:nth-child(3) .copy:before { background-image:url('https://images.unsplash.com/photo-1490806843957-31f4c9a91c65?auto=format&fit=crop&w=720&q=80'); }
+    .stop:nth-child(4) .copy:before { background-image:url('https://cdn.shopify.com/s/files/1/0412/0422/0060/files/amazakechaya01_ac6a1c11-73ca-4d3f-a233-69a35a727fb1.jpg?v=1617755841'); }
+    .stop:nth-child(5) .copy:before { background-image:url('https://izu-tourism.com/wp-content/uploads/2024/06/tikurinnokomiti5-scaled.jpg'); }
+    .stop:nth-child(6) .copy:before { background-image:url('https://visitkanazawa.jp/lsc/upfile/articleDetail/0000/0975/975_3_xl.jpg'); }
+    .stop:last-child .copy { border:none; }
+    .stop:last-child .copy { min-height:0; padding-left:0; }
+    .stop:last-child .copy:before { display:none; }
+    .place { display:flex; gap:10px; align-items:baseline; flex-wrap:wrap; font-size:1.24rem; font-weight:800; }
+    .nights { color:var(--muted); font-size:.95rem; font-weight:500; }
+    .copy p { margin:6px 0; }
+    .tag { display:inline-block; margin-top:5px; padding:3px 9px; border-radius:999px; background:#e3eee9; color:var(--pine); font-size:.83rem; font-weight:700; }
+    .saved { padding:50px 0 64px; }
+    .gallery { display:grid; grid-template-columns:repeat(2,1fr); gap:18px; }
+    .card { min-height:265px; border-radius:16px; overflow:hidden; position:relative; display:flex; align-items:end; color:white; background:#456; background-position:center; background-size:cover; }
+    .card:before { content:""; position:absolute; inset:0; background:linear-gradient(0deg,rgba(20,31,26,.82),rgba(20,31,26,.04) 72%); }
+    .card div { position:relative; padding:22px; }
+    .card h3 { font-family:Georgia,serif; margin:0; font-size:1.7rem; }
+    .card p { margin:4px 0 0; }
+    .osaka { background-image:url('https://a0.muscache.com/im/pictures/Mt/MtTemplate-221858/original/6d6d57af-ef1b-47e2-8d0f-161f3362b50d.jpeg'); }
+    .kanazawa { background-image:url('https://visitkanazawa.jp/lsc/upfile/articleDetail/0000/0975/975_3_xl.jpg'); }
+    .izu { background-image:url('https://guidable.co/wp-content/uploads/2022/05/shuzenji-featured-image.jpg'); }
+    .oita { background-image:url('https://prd-static.gltjp.com/glt/data/article/21000/20577/20240110_093005_cd52e6c7_w1920.jpg'); }
+    .sado { background-image:url('https://rimage.gnst.jp/livejapan.com/public/article/detail/a/30/00/a3000353/img/en/a3000353_parts_69eef85ced9f0.jpg?20260427140528=&q=80'); }
+    .wakayama { background-image:url('https://www.japanrailclub.com/wp-content/uploads/2024/11/Wakaden_Closing.jpg'); }
+    footer { padding:30px max(24px, calc((100vw - 1120px)/2)); background:#1f2924; color:#e9e3d7; }
+    footer p { max-width:800px; margin:0; }
+    @media (max-width:700px) { header { min-height:390px; } .work-strip { margin-top:-22px; align-items:flex-start; } .stop { grid-template-columns:70px 34px 1fr; gap:10px; } .date { font-size:.86rem; } .copy { padding-left:76px; } .copy:before { width:64px; height:64px; } .gallery, .saved-pin-grid, .daily-grid, .klook-grid { grid-template-columns:1fr; } .city-block { padding:17px; } .city-heading img { width:104px; height:82px; } .day-card { padding-left:92px; } .day-card:before { width:76px; } }
+  </style>
+</head>
+<body>
+  <header>
+    <div>
+      <p class="eyebrow">20 September – 11 October 2026</p>
+      <h1>Japan, slowly.</h1>
+      <p class="intro">A festival, theme-park, Fuji and onsen trip built around quiet evenings, traditional stays and dependable UK work calls.</p>
+    </div>
+  </header>
+  <main>
+    <section class="work-strip"><span aria-hidden="true">💻</span><div><strong>Work rhythm:</strong> explore from 09:00–15:30 Japan time; be back, fed and fully set up by 16:30 for UK meetings from 18:00 onwards.</div></section>
+    <section class="map-section">
+      <h2>Your route on the map</h2>
+      <p class="sub">These are your overnight bases, in travel order. The saved attractions are scheduled within each base below.</p>
+      <div class="route-map" role="img" aria-label="Numbered Japan route: Osaka, Tokyo, Kawaguchiko, Hakone, Izu, Kanazawa and Osaka">
+        <svg viewBox="0 0 1080 450" aria-hidden="true">
+          <rect width="1080" height="450" fill="#dce8df"/>
+          <path d="M40 95H1040M40 185H1040M40 275H1040M40 365H1040M180 35V415M380 35V415M580 35V415M780 35V415M980 35V415" class="map-grid"/>
+          <text x="55" y="70" class="map-small">WEST / Kansai</text><text x="840" y="70" class="map-small">EAST / Tokyo</text>
+          <path d="M165 374 L953 236 L782 261 L849 298 L817 333 L384 112" class="route-line"/>
+          <path d="M384 112 L115 400" class="route-return"/>
+          <g><circle cx="165" cy="374" r="18" class="map-pin"/><text x="165" y="374" class="map-number">1</text><text x="193" y="370" class="map-label">Osaka</text><text x="193" y="389" class="map-small">20–22 Sep</text></g>
+          <g><circle cx="953" cy="236" r="18" class="map-pin"/><text x="953" y="236" class="map-number">2</text><text x="875" y="210" class="map-label">Tokyo</text><text x="875" y="229" class="map-small">23–27 Sep</text></g>
+          <g><circle cx="782" cy="261" r="18" class="map-pin"/><text x="782" y="261" class="map-number">3</text><text x="650" y="286" class="map-label">Kawaguchiko</text><text x="650" y="305" class="map-small">28–29 Sep</text></g>
+          <g><circle cx="849" cy="298" r="18" class="map-pin"/><text x="849" y="298" class="map-number">4</text><text x="873" y="300" class="map-label">Hakone</text><text x="873" y="319" class="map-small">30 Sep–1 Oct</text></g>
+          <g><circle cx="817" cy="333" r="18" class="map-pin"/><text x="817" y="333" class="map-number">5</text><text x="842" y="358" class="map-label">Izu / Shuzenji</text><text x="842" y="377" class="map-small">2–4 Oct</text></g>
+          <g><circle cx="384" cy="112" r="18" class="map-pin"/><text x="384" y="112" class="map-number">6</text><text x="408" y="108" class="map-label">Kanazawa</text><text x="408" y="127" class="map-small">5–7 Oct</text></g>
+          <g><circle cx="115" cy="400" r="18" class="map-pin return"/><text x="115" y="400" class="map-number">7</text><text x="145" y="414" class="map-label">Osaka</text><text x="145" y="433" class="map-small">8–10 Oct</text></g>
+          <text x="45" y="430" class="map-small">Solid line: onwards journey</text><text x="445" y="430" class="map-small">Dashed line: return to Kansai</text>
+        </svg>
+      </div>
+      <div class="key"><i></i> Weekday <i class="weekend"></i> Weekend — useful for your longer excursions</div>
+      <div class="calendar" aria-label="Dates and weekdays for the trip, arranged Monday to Sunday">
+        <div class="day-head">Mon</div><div class="day-head">Tue</div><div class="day-head">Wed</div><div class="day-head">Thu</div><div class="day-head">Fri</div><div class="day-head">Sat</div><div class="day-head">Sun</div>
+        <div class="day blank">&nbsp;</div><div class="day blank">&nbsp;</div><div class="day blank">&nbsp;</div><div class="day blank">&nbsp;</div><div class="day blank">&nbsp;</div><div class="day blank">&nbsp;</div><div class="day weekend"><span>Sun</span>20 Sep</div>
+        <div class="day"><span>Mon</span>21 Sep</div><div class="day"><span>Tue</span>22 Sep</div><div class="day"><span>Wed</span>23 Sep</div><div class="day"><span>Thu</span>24 Sep</div><div class="day"><span>Fri</span>25 Sep</div><div class="day weekend"><span>Sat</span>26 Sep</div><div class="day weekend"><span>Sun</span>27 Sep</div>
+        <div class="day"><span>Mon</span>28 Sep</div><div class="day"><span>Tue</span>29 Sep</div><div class="day"><span>Wed</span>30 Sep</div><div class="day"><span>Thu</span>1 Oct</div><div class="day"><span>Fri</span>2 Oct</div><div class="day weekend"><span>Sat</span>3 Oct</div><div class="day weekend"><span>Sun</span>4 Oct</div>
+        <div class="day"><span>Mon</span>5 Oct</div><div class="day"><span>Tue</span>6 Oct</div><div class="day"><span>Wed</span>7 Oct</div><div class="day"><span>Thu</span>8 Oct</div><div class="day"><span>Fri</span>9 Oct</div><div class="day weekend"><span>Sat</span>10 Oct</div><div class="day weekend"><span>Sun</span>11 Oct</div>
+      </div>
+      <div class="saved-pins">
+        <h3>Your saved places scheduled in this route</h3>
+        <div class="saved-pin-grid">
+          <div class="saved-pin">Osaka / Kansai<span>Round1 Sennichimae · Ebisucho · LUCUA · Rikuro’s · Chogosonshi-ji · Wakayama cat train</span></div>
+          <div class="saved-pin">Tokyo + day trips<span>TAMBURINS Daikanyama · Hie Daijinja · Gajoen · Chokuritsuenjin · Jimbocho · Kamakura rider · Yokohama Chinatown</span></div>
+          <div class="saved-pin">Hakone<span>Hakone Yuryo · Hamamatsuya · Old Tokaido Road · Amasake Chaya · Naraya Cafe · Miharashichaya Utsuki</span></div>
+        </div>
+      </div>
+      <div class="klook-plan">
+        <h3>Your Klook saves — where they fit</h3>
+        <p>Green = a good fit in the current plan. Pink = choose it only by swapping something else.</p>
+        <div class="klook-grid">
+          <div class="klook-item"><b>Mon 21 · USJ Studio Pass</b><span>Already your all-day Osaka plan. Book this one first.</span></div>
+          <div class="klook-item"><b>Tue 22 · Heavy Machinery RC Cafe</b><span>Namba, 90 minutes; a fun 13:30–15:00 add-on.</span></div>
+          <div class="klook-item choice"><b>Ghibli Park, Aichi</b><span>Not a casual add. Use Tue 22 as a full Nagoya day instead of slow Osaka/RC Cafe.</span></div>
+          <div class="klook-item"><b>Wed 23 · REEAST Rage Room</b><span>Short Shinjuku session after hotel check-in, only if your train arrives early.</span></div>
+          <div class="klook-item"><b>Thu 24 · Tokyo Disneyland</b><span>Already your all-day park day.</span></div>
+          <div class="klook-item"><b>Fri 25 · teamLab Borderless</b><span>Book a morning slot; pair with Daikanyama afterwards.</span></div>
+          <div class="klook-item"><b>Sat 26 · Harry Potter Studio Tour</b><span>Morning / early afternoon, then rest before the fireworks.</span></div>
+          <div class="klook-item"><b>Sun 27 · Muscle Girl Bar</b><span>80 minutes in Ikebukuro; best evening choice because you are off work.</span></div>
+          <div class="klook-item"><b>30 Sep–1 Oct · Hakone Freepass</b><span>Useful for your two Hakone days; buy the version matching your actual route.</span></div>
+          <div class="klook-item choice"><b>Sat 10 · Full Wakayama Klook tour</b><span>Use this instead of the short DIY cat-train day. It is long, so do not put it on a workday.</span></div>
+        </div>
+      </div>
+    </section>
+    <section class="route-summary">
+      <h2>The current route</h2>
+      <p class="sub">Designed for arrival and departure through Kansai. Travel days are morning-only on weekdays.</p>
+      <div class="timeline">
+        <article class="stop"><div class="date">Sun–Tue<br>20–22 Sep</div><div class="line"><span class="pin">祭</span></div><div class="copy"><div class="place">Osaka <span class="nights">3 nights</span></div><p>Kishiwada Danjiri on Sunday, USJ on Monday, then a low-key food and neighbourhood day.</p><p class="scheduled"><strong>Saved places, now scheduled:</strong> Mon 21 — USJ then Round1 Sennichimae. Tue 22 — Ebisucho, Rikuro’s cheesecake and LUCUA.</p><span class="tag">Festival + fun</span></div></article>
+        <article class="stop"><div class="date">Wed–Sun<br>23–27 Sep</div><div class="line"><span class="pin">東京</span></div><div class="copy"><div class="place">Tokyo <span class="nights">5 nights</span></div><p>Disneyland, Kita City Fireworks, and the Nezu Shrine procession. Stay somewhere quiet with a proper desk.</p><p class="scheduled"><strong>Saved places, now scheduled:</strong> Fri 25 — TAMBURINS Daikanyama + Hie Daijinja. Sat 26 — fireworks, with Gajoen or Jimbocho earlier. Sun 27 — Kamakura’s Beetle Rider <em>or</em> Yokohama Chinatown; keep Chokuritsuenjin as the evening option.</p><span class="tag">Big-city events</span></div></article>
+        <article class="stop"><div class="date">Mon–Tue<br>28–29 Sep</div><div class="line"><span class="pin">富</span></div><div class="copy"><div class="place">Kawaguchiko <span class="nights">2 nights</span></div><p>Mt Fuji views and one same-branch, small automatic-car day—return it by mid-afternoon.</p><span class="tag">Gentle first drive</span></div></article>
+        <article class="stop"><div class="date">Wed–Thu<br>30 Sep–1 Oct</div><div class="line"><span class="pin">♨</span></div><div class="copy"><div class="place">Hakone <span class="nights">2 nights</span></div><p>Ryokan, private onsen, Lake Ashi and Owakudani. Ask for an early dinner before evening meetings.</p><p class="scheduled"><strong>Saved places, now scheduled:</strong> Wed 30 — Old Tokaido Road + Amasake Chaya, then Hakone Yuryo. Thu 1 — Hamamatsuya, Naraya Cafe and Miharashichaya Utsuki around a lighter Lake Ashi day.</p><span class="tag">Onsen reset</span></div></article>
+        <article class="stop"><div class="date">Fri–Sun<br>2–4 Oct</div><div class="line"><span class="pin">海</span></div><div class="copy"><div class="place">Izu <span class="nights">3 nights</span></div><p>Shuzenji for riverside ryokan, bamboo groves and quiet onsen; coastal Izu if you want the sea. This is the slower, more personal follow-on from Hakone.</p><span class="tag">Coastal onsen</span></div></article>
+        <article class="stop"><div class="date">Mon–Wed<br>5–7 Oct</div><div class="line"><span class="pin">茶</span></div><div class="copy"><div class="place">Kanazawa <span class="nights">3 nights</span></div><p>Tea houses, crafts, gardens and the samurai district—a new city with culture rather than a checklist.</p><span class="tag">Traditional culture</span></div></article>
+        <article class="stop"><div class="date">Thu–Sat<br>8–10 Oct</div><div class="line"><span class="pin">大</span></div><div class="copy"><div class="place">Osaka <span class="nights">3 nights</span></div><p>Easy final food, shopping, Mount Shigi and a possible Wakayama cat-train day trip.</p><p class="scheduled"><strong>Saved places, now scheduled:</strong> Thu 8 — Chogosonshi-ji on Mount Shigi. Fri 9 — Wakayama Station and the Kishigawa cat train. Sat 10 — keep free for Osaka favourites / shopping.</p><span class="tag">Soft landing</span></div></article>
+        <article class="stop"><div class="date">Sun<br>11 Oct</div><div class="line"><span class="pin">✈</span></div><div class="copy"><div class="place">Depart Kansai</div><p>Fly home.</p></div></article>
+      </div>
+    </section>
+    <section class="saved">
+      <section class="daily">
+        <h2>Daily outline — with room to breathe</h2>
+        <p class="sub">Morning and afternoon are for Japan. From 18:00 Japan time, assume you’re at the hotel for UK work unless a day is marked “open”.</p>
+        <nav class="city-nav" aria-label="Jump to city"><a href="#osaka-start">Osaka</a><a href="#tokyo">Tokyo</a><a href="#kawaguchiko">Kawaguchiko</a><a href="#hakone">Hakone</a><a href="#izu">Izu</a><a href="#kanazawa">Kanazawa</a><a href="#osaka-finale">Osaka finale</a></nav>
+
+        <div class="city-block osaka-days">
+          <div class="city-heading"><img src="https://a0.muscache.com/im/pictures/Mt/MtTemplate-221858/original/6d6d57af-ef1b-47e2-8d0f-161f3362b50d.jpeg" alt="Neon Dotonbori in Osaka"><div><span class="city-label">Base 1 · 3 nights</span><h3 id="osaka-start">Osaka · 20–22 Sep</h3><p class="city-note">Festival, USJ, then neighbourhood food and saved spots.</p></div></div>
+          <div class="daily-grid">
+            <article class="day-card"><h4>Sun 20 · Kishiwada Danjiri</h4><p class="slot"><b>Morning</b> Arrive / settle into Osaka. If you land early, train to Kishiwada for the festival.</p><p class="slot"><b>Afternoon</b> Danjiri atmosphere, then back to Osaka before it gets tiring.</p><p class="slot open"><b>Evening</b> Hotel, easy dinner, or leave blank if flight timing is tight.</p></article>
+            <article class="day-card"><h4>Mon 21 · USJ + Round1</h4><p class="slot"><b>Morning</b> Universal Studios Japan — arrive before opening.</p><p class="slot"><b>Afternoon</b> Continue USJ; leave around 15:30 for a relaxed return.</p><p class="slot"><b>Evening</b> Round1 Sennichimae only if no work call; otherwise dinner near hotel.</p></article>
+            <article class="day-card"><h4>Tue 22 · Choose your Osaka add-on</h4><p class="slot"><b>Morning</b> Ebisucho wander + Rikuro’s cheesecake.</p><p class="slot"><b>Afternoon</b> Heavy Machinery RC Cafe in Namba (90 minutes), then LUCUA.</p><p class="slot open"><b>Swap option</b> Make this a full Ghibli Park / Aichi day instead — do not try to combine both.</p></article>
+          </div>
+        </div>
+
+        <div class="city-block tokyo-days">
+          <div class="city-heading"><img src="https://www.gotokyo.org/shared/images/pages/destinations/western-tokyo/daikanyama/images/xarea034_1011_7.jpg.pagespeed.ic.zuueHxqQu5.jpg" alt="Daikanyama street in Tokyo"><div><span class="city-label">Base 2 · 5 nights</span><h3 id="tokyo">Tokyo · 23–27 Sep</h3><p class="city-note">One park day, two city days, then the weekend events.</p></div></div>
+          <div class="daily-grid">
+            <article class="day-card"><h4>Wed 23 · Arrive + Meguro</h4><p class="slot"><b>Morning</b> Shinkansen from Osaka; leave bags at hotel.</p><p class="slot"><b>Afternoon</b> Gajoen Tokyo / Meguro; add REEAST Rage Room only if the train is early.</p><p class="slot open"><b>Evening</b> Open — get set up for work and choose a nearby dinner.</p></article>
+            <article class="day-card"><h4>Thu 24 · Disneyland</h4><p class="slot"><b>Morning</b> Tokyo Disneyland — arrive before opening.</p><p class="slot"><b>Afternoon</b> Park until about 15:30, then return.</p><p class="slot"><b>Evening</b> Hotel early for UK work.</p></article>
+            <article class="day-card"><h4>Fri 25 · teamLab + Daikanyama</h4><p class="slot"><b>Morning</b> Book teamLab Borderless for a morning time slot.</p><p class="slot"><b>Afternoon</b> TAMBURINS Daikanyama, Hie Daijinja, or Jimbocho — choose one extra area.</p><p class="slot"><b>Evening</b> Chokuritsuenjin jazz kissa only if work is light.</p></article>
+            <article class="day-card"><h4>Sat 26 · Harry Potter + fireworks</h4><p class="slot"><b>Morning</b> Warner Bros. Studio Tour Tokyo.</p><p class="slot"><b>Afternoon</b> Head north early and get comfortable before the Kita City fireworks.</p><p class="slot"><b>Evening</b> Fireworks (then late dinner).</p></article>
+            <article class="day-card"><h4>Sun 27 · Choose one day trip + bar</h4><p class="slot"><b>Morning</b> Option A: Nezu Shrine procession. Option B: Kamakura + Beetle Rider.</p><p class="slot"><b>Afternoon</b> Continue Kamakura <em>or</em> Yokohama Chinatown — not both.</p><p class="slot"><b>Evening</b> Muscle Girl Bar in Ikebukuro, then calm packing for Fuji.</p></article>
+          </div>
+        </div>
+
+        <div class="city-block fuji-days">
+          <div class="city-heading"><img src="https://images.unsplash.com/photo-1490806843957-31f4c9a91c65?auto=format&amp;fit=crop&amp;w=720&amp;q=80" alt="Mount Fuji landscape near Kawaguchiko"><div><span class="city-label">Base 3 · 2 nights</span><h3 id="kawaguchiko">Kawaguchiko · 28–29 Sep</h3><p class="city-note">The gentle practice-drive part of the trip.</p></div></div>
+          <div class="daily-grid">
+            <article class="day-card"><h4>Mon 28 · Fuji arrival</h4><p class="slot"><b>Morning</b> Travel from Tokyo and check in / leave bags.</p><p class="slot"><b>Afternoon</b> Lake walk, view point, or ryokan onsen — keep it easy.</p><p class="slot"><b>Evening</b> Ryokan dinner + hotel work setup.</p></article>
+            <article class="day-card"><h4>Tue 29 · Short self-drive</h4><p class="slot"><b>Morning</b> Collect a small automatic car at the same branch.</p><p class="slot"><b>Afternoon</b> One simple lakeside / Fuji-view loop; return car by mid-afternoon.</p><p class="slot open"><b>Evening</b> Open — onsen and a quiet meal.</p></article>
+          </div>
+        </div>
+
+        <div class="city-block hakone-days">
+          <div class="city-heading"><img src="https://cdn.shopify.com/s/files/1/0412/0422/0060/files/amazakechaya01_ac6a1c11-73ca-4d3f-a233-69a35a727fb1.jpg?v=1617755841" alt="Amasake Chaya tea house in Hakone"><div><span class="city-label">Base 4 · 2 nights</span><h3 id="hakone">Hakone · 30 Sep–1 Oct</h3><p class="city-note">Saved places are grouped by area, not a packed Hakone loop.</p></div></div>
+          <div class="daily-grid">
+            <article class="day-card"><h4>Wed 30 · Old Tokaido</h4><p class="slot"><b>Morning</b> Transfer in; Old Tokaido Road at a comfortable pace.</p><p class="slot"><b>Afternoon</b> Amasake Chaya, then Hakone Yuryo for an onsen reset.</p><p class="slot"><b>Evening</b> Early ryokan dinner, then work.</p></article>
+            <article class="day-card"><h4>Thu 1 · Hakone craft + café</h4><p class="slot"><b>Morning</b> Hamamatsuya woodcraft.</p><p class="slot"><b>Afternoon</b> Naraya Cafe and Miharashichaya Utsuki; only add Lake Ashi if you have energy.</p><p class="slot open"><b>Evening</b> Open — pack gently for Izu.</p></article>
+          </div>
+        </div>
+
+        <div class="city-block izu-days">
+          <div class="city-heading"><img src="https://izu-tourism.com/wp-content/uploads/2024/06/tikurinnokomiti5-scaled.jpg" alt="Bamboo grove in Shuzenji, Izu"><div><span class="city-label">Base 5 · 3 nights</span><h3 id="izu">Izu · 2–4 Oct</h3><p class="city-note">A deliberately spacious onsen-and-sea pause.</p></div></div>
+          <div class="daily-grid">
+            <article class="day-card"><h4>Fri 2 · Settle into Shuzenji</h4><p class="slot"><b>Morning</b> Short transfer from Hakone.</p><p class="slot"><b>Afternoon</b> Riverside walk, bamboo grove and ryokan check-in.</p><p class="slot"><b>Evening</b> Kaiseki / onsen, then work.</p></article>
+            <article class="day-card"><h4>Sat 3 · Izu free day</h4><p class="slot open"><b>Morning</b> Open — add a coast trip, a café, or sleep in.</p><p class="slot open"><b>Afternoon</b> Open — choose one scenic stop only.</p><p class="slot"><b>Evening</b> Onsen and unhurried dinner.</p></article>
+            <article class="day-card"><h4>Sun 4 · Izu free day</h4><p class="slot open"><b>Morning</b> Open — another onsen, beach, or local train ride.</p><p class="slot open"><b>Afternoon</b> Open — leave room to do nothing.</p><p class="slot"><b>Evening</b> Pack for Kanazawa.</p></article>
+          </div>
+        </div>
+
+        <div class="city-block kanazawa-days">
+          <div class="city-heading"><img src="https://visitkanazawa.jp/lsc/upfile/articleDetail/0000/0975/975_3_xl.jpg" alt="Higashi Chaya tea-house district in Kanazawa"><div><span class="city-label">Base 6 · 3 nights</span><h3 id="kanazawa">Kanazawa · 5–7 Oct</h3><p class="city-note">A new traditional city — no need to tick off everything.</p></div></div>
+          <div class="daily-grid">
+            <article class="day-card"><h4>Mon 5 · Arrival + tea district</h4><p class="slot"><b>Morning</b> Travel from Izu; plan it as the one longer transfer.</p><p class="slot"><b>Afternoon</b> Check in, then an easy Higashi Chaya stroll.</p><p class="slot"><b>Evening</b> Dinner nearby + work setup.</p></article>
+            <article class="day-card"><h4>Tue 6 · Garden + crafts</h4><p class="slot"><b>Morning</b> Kenrokuen at a slow pace.</p><p class="slot"><b>Afternoon</b> One craft workshop or museum, then café time.</p><p class="slot open"><b>Evening</b> Open — choose a small izakaya or rest.</p></article>
+            <article class="day-card"><h4>Wed 7 · Samuraimachi</h4><p class="slot"><b>Morning</b> Nagamachi samurai district.</p><p class="slot open"><b>Afternoon</b> Open — revisit a favourite, shop for crafts, or do nothing.</p><p class="slot"><b>Evening</b> Pack for Osaka.</p></article>
+          </div>
+        </div>
+
+        <div class="city-block osaka-finale-days">
+          <div class="city-heading"><img src="https://a0.muscache.com/im/pictures/Mt/MtTemplate-221858/original/6d6d57af-ef1b-47e2-8d0f-161f3362b50d.jpeg" alt="Osaka at night"><div><span class="city-label">Base 7 · 3 nights</span><h3 id="osaka-finale">Osaka finale · 8–10 Oct</h3><p class="city-note">Mount Shigi, the cat train, then a fully open last Saturday.</p></div></div>
+          <div class="daily-grid">
+            <article class="day-card"><h4>Thu 8 · Mount Shigi</h4><p class="slot"><b>Morning</b> Return from Kanazawa.</p><p class="slot"><b>Afternoon</b> Chogosonshi-ji / Mount Shigi — tigers, lanterns, temple grounds.</p><p class="slot"><b>Evening</b> Back in Osaka for work.</p></article>
+            <article class="day-card"><h4>Fri 9 · Wakayama cat train</h4><p class="slot"><b>Morning</b> Wakayama Station, then Platform 9 / Kishigawa Line.</p><p class="slot"><b>Afternoon</b> Kishi Station and a relaxed countryside return.</p><p class="slot"><b>Evening</b> Final Osaka dinner + work.</p></article>
+            <article class="day-card"><h4>Sat 10 · Completely open</h4><p class="slot open"><b>Morning</b> Add your own favourite — café, shopping, tattoo, food or another saved idea.</p><p class="slot open"><b>Afternoon</b> Open — no obligation to fill this.</p><p class="slot"><b>Evening</b> Last dinner and pack.</p></article>
+          </div>
+        </div>
+      </section>
+      <h2>Your saved places, shaping the trip</h2>
+      <p class="sub">Your saved places point to an atmospheric mix of onsen, art, odd local culture and old streets. Izu is now in the main route; Oita and Niigata/Sado stay as strong alternatives for another trip.</p>
+      <div class="gallery">
+        <article class="card osaka"><div><h3>Osaka &amp; Kansai</h3><p>Festival energy, cafés, Mount Shigi, Wakayama and the cat train.</p></div></article>
+        <article class="card kanazawa"><div><h3>Kanazawa</h3><p>Tea houses, crafts and a calmer kind of traditional city.</p></div></article>
+        <article class="card izu"><div><h3>Izu / Shuzenji</h3><p>The best Hakone follow-on: riverside ryokan, bamboo and a much quieter onsen town.</p></div></article>
+        <article class="card oita"><div><h3>Oita / Yufuin</h3><p>Your saved onsen-and-cinematic alternative: rural scenery, ryokan and anime-adjacent finds.</p></div></article>
+        <article class="card sado"><div><h3>Sado &amp; Niigata</h3><p>Kitazawa ruins, Echigo-Tsumari, Kiyotsu Gorge and sake—save this as an art-and-landscape trip.</p></div></article>
+        <article class="card wakayama"><div><h3>Wakayama</h3><p>A playful final detour: themed trains, cat stationmaster and countryside calm.</p></div></article>
+      </div>
+    </section>
+  </main>
+  <footer><p>Booking rule: on any weekday transfer, arrive by mid-afternoon. For ryokan stays, confirm a real work table, stable Wi-Fi, and a dinner time before your 18:00 Japan meeting.</p></footer>
+</body>
+</html>
