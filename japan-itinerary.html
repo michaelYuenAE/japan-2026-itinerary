@@ -44,6 +44,16 @@
     .saved-pin-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:10px; }
     .saved-pin { padding:11px 12px; border-radius:10px; background:#edf3ee; color:var(--pine); font-size:.86rem; font-weight:750; }
     .saved-pin span { display:block; margin-top:3px; color:var(--muted); font-size:.78rem; font-weight:500; }
+    .hotel-plan { margin:26px 0 0; padding:20px; border-radius:14px; background:#fffdf8; border:1px solid #e4d9c8; }
+    .hotel-plan h3 { margin:0 0 5px; font-family:Georgia,serif; font-size:1.2rem; }
+    .hotel-plan > p { margin:0 0 13px; color:var(--muted); font-size:.86rem; }
+    .hotel-grid { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:10px; }
+    .hotel-card { padding:13px; border-radius:10px; background:#f5f0e7; }
+    .hotel-card h4 { margin:0 0 4px; font-family:Georgia,serif; font-size:1rem; }
+    .hotel-card p { margin:3px 0; color:var(--muted); font-size:.78rem; line-height:1.42; }
+    .hotel-status { display:inline-block; margin-bottom:7px; padding:3px 7px; border-radius:999px; background:#e2eee4; color:#28543b; font-size:.65rem; font-weight:800; letter-spacing:.04em; text-transform:uppercase; }
+    .hotel-status.pending { background:#f8ead5; color:#85541d; }
+    .hotel-status.plan { background:#e7edf2; color:#31506a; }
     .klook-plan { margin:26px 0 0; padding:21px; border-radius:14px; background:#fff6e9; border:1px solid #ead8bc; }
     .klook-plan h3 { margin:0 0 5px; font-family:Georgia,serif; font-size:1.25rem; }
     .klook-plan > p { margin:0 0 15px; color:var(--muted); font-size:.9rem; }
@@ -139,7 +149,7 @@
     .wakayama { background-image:url('https://www.japanrailclub.com/wp-content/uploads/2024/11/Wakaden_Closing.jpg'); }
     footer { padding:30px max(24px, calc((100vw - 1120px)/2)); background:#1f2924; color:#e9e3d7; }
     footer p { max-width:800px; margin:0; }
-    @media (max-width:700px) { header { min-height:390px; } .work-strip { margin-top:-22px; align-items:flex-start; } .stop { grid-template-columns:70px 34px 1fr; gap:10px; } .date { font-size:.86rem; } .copy { padding-left:76px; } .copy:before { width:64px; height:64px; } .gallery, .saved-pin-grid, .daily-grid, .klook-grid { grid-template-columns:1fr; } .city-block { padding:17px; } .city-heading img { width:104px; height:82px; } .day-card { padding-left:92px; } .day-card:before { width:76px; } }
+    @media (max-width:700px) { header { min-height:390px; } .work-strip { margin-top:-22px; align-items:flex-start; } .stop { grid-template-columns:70px 34px 1fr; gap:10px; } .date { font-size:.86rem; } .copy { padding-left:76px; } .copy:before { width:64px; height:64px; } .gallery, .saved-pin-grid, .hotel-grid, .daily-grid, .klook-grid { grid-template-columns:1fr; } .city-block { padding:17px; } .city-heading img { width:104px; height:82px; } .day-card { padding-left:92px; } .day-card:before { width:76px; } }
   </style>
 </head>
 <body>
@@ -188,6 +198,18 @@
           <div class="saved-pin">Hakone<span>Hakone Yuryo · Hamamatsuya · Old Tokaido Road · Amasake Chaya · Naraya Cafe · Miharashichaya Utsuki</span></div>
           <div class="saved-pin">Fuji + Izu<span>Saiko Lake · Saiko Iyashi-no-Sato Nemba · Izu Shaboten Zoo · Tokaikan · Kawazu Seven Waterfalls</span></div>
           <div class="saved-pin">Kanazawa<span>Pavlov’s Dog Café, inside the Schrödinger’s Cat oddities shop.</span></div>
+        </div>
+      </div>
+      <div class="hotel-plan">
+        <h3>Your hotels so far</h3>
+        <p>Booked stays are recorded below. For Ito, choose a normal en-suite hotel; another onsen is optional after Hakone.</p>
+        <div class="hotel-grid">
+          <article class="hotel-card"><span class="hotel-status">Booked</span><h4>The OneFive Osaka Sakaisuji</h4><p><strong>Osaka · 20–23 Sep</strong> · 3 nights</p><p>Standard Double, non-smoking, 15 m² · HK$1,968.21 total.</p></article>
+          <article class="hotel-card"><span class="hotel-status">Booked</span><h4>Section L Residence Asakusa East</h4><p><strong>Tokyo · 23–28 Sep</strong> · 5 nights</p><p>Deluxe Studio, double bed, 30 m², balcony · HK$3,669.83 total.</p></article>
+          <article class="hotel-card"><span class="hotel-status">Booked</span><h4>Fujikawaguchiko Resort Hotel</h4><p><strong>Kawaguchiko · 28–30 Sep</strong> · 2 nights</p><p>Japanese-style room, 24 m², private bathroom · HK$1,715.44 total.</p></article>
+          <article class="hotel-card"><span class="hotel-status pending">Awaiting confirmation</span><h4>YuYu Hakone</h4><p><strong>Hakone · 30 Sep–2 Oct</strong> · 2 nights</p><p>6 futons · HK$1,833.01 total · private open-air onsen use guaranteed.</p></article>
+          <article class="hotel-card"><span class="hotel-status plan">Next booking</span><h4>Ito · 2–5 Oct</h4><p>Use Ito / Minami-Ito Station as the search area.</p><p>Required: non-smoking, own bathroom, free cancellation. Target HK$500–800 per night; don’t pay extra for another onsen.</p></article>
+          <article class="hotel-card"><span class="hotel-status plan">Not booked</span><h4>Kanazawa + final Osaka</h4><p><strong>Kanazawa · 5–8 Oct</strong> · <strong>Osaka · 8–11 Oct</strong></p><p>Prioritise en-suite rooms and free cancellation; Kanazawa Station/Korinbo, then Umeda/Shinsaibashi.</p></article>
         </div>
       </div>
       <div class="klook-plan">
@@ -265,10 +287,10 @@
         </div>
 
         <div class="city-block izu-days">
-          <div class="city-heading"><img src="https://izu-tourism.com/wp-content/uploads/2024/06/tikurinnokomiti5-scaled.jpg" alt="Izu coast"><div><span class="city-label">Base 5 · 3 nights</span><h3 id="izu">Izu / Ito coast · 2–4 Oct</h3><p class="city-note"><strong>Optimised base:</strong> stay in Ito rather than Shuzenji. It unlocks Atami Pudding, Tokaikan, Izu Shaboten and the Kawazu side without daily cross-peninsula travel.</p></div></div>
+          <div class="city-heading"><img src="https://izu-tourism.com/wp-content/uploads/2024/06/tikurinnokomiti5-scaled.jpg" alt="Izu coast"><div><span class="city-label">Base 5 · 3 nights</span><h3 id="izu">Izu / Ito coast · 2–4 Oct</h3><p class="city-note"><strong>Different mood after Hakone:</strong> choose a simple en-suite hotel in Ito and make this the sea, café and old-town part of the holiday. Any onsen here is a bonus, not the reason to pay more.</p></div></div>
           <div class="daily-grid">
-            <article class="day-card"><h4>Fri 2 · Hakone → Atami → Ito</h4><p class="slot"><b>Morning</b> Leave Hakone slowly; break the transfer at Atami for Atami Pudding.</p><p class="slot"><b>Afternoon</b> Check into an Ito onsen hotel, then see Tokaikan—the beautifully preserved 1928 ryokan.</p><p class="slot"><b>Evening</b> Proper onsen evening near your hotel.</p></article>
-            <article class="day-card"><h4>Sat 3 · East Izu capybaras</h4><p class="slot"><b>Morning</b> Izu Shaboten Zoo for the capybara hot-spring moment.</p><p class="slot"><b>Afternoon</b> Return via the coast; add one café only, then leave time for your hotel onsen.</p><p class="slot"><b>Evening</b> Unhurried dinner in Ito.</p></article>
+            <article class="day-card"><h4>Fri 2 · Hakone → Atami → Ito</h4><p class="slot"><b>Morning</b> Leave Hakone slowly; break the transfer at Atami for Atami Pudding only if it feels easy.</p><p class="slot"><b>Afternoon</b> Check into your en-suite Ito hotel, then walk Orange Beach or see Tokaikan—the beautifully preserved 1928 ryokan.</p><p class="slot"><b>Evening</b> Simple seafood dinner near Ito Station and an early night.</p></article>
+            <article class="day-card"><h4>Sat 3 · East Izu capybaras</h4><p class="slot"><b>Morning</b> Train towards Izu-Kogen, then Izu Shaboten Zoo for the capybara hot-spring moment and Mount Omuro views.</p><p class="slot"><b>Afternoon</b> Return via the coast; add one café or beach stop, not another attraction.</p><p class="slot"><b>Evening</b> Unhurried dinner in Ito.</p></article>
             <article class="day-card"><h4>Sun 4 · Kawazu choice day</h4><p class="slot open"><b>Morning</b> Local train south to Kawazu Seven Waterfalls <em>or</em> stay closer for a slow Ito beach / café day.</p><p class="slot open"><b>Afternoon</b> Choose one route, not both; this is the deliberately empty day.</p><p class="slot"><b>Evening</b> Return early and pack for Kanazawa.</p></article>
           </div>
         </div>
